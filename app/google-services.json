@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "991736482048",
+    "project_id": "mad-trektimer",
+    "storage_bucket": "mad-trektimer.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991736482048:android:b992fb2e8408c1177a8be5",
+        "android_client_info": {
+          "package_name": "com.example.trektimer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCf5DYMUYmWTcXiGscgjg3lV3oFIPX0g8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
