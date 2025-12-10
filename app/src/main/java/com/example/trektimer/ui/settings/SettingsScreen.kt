@@ -3,22 +3,15 @@ package com.example.trektimer.ui.settings
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.ListItem
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Switch
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.runtime.Composable
+import androidx.compose.material.icons.filled.ExitToApp
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
@@ -27,17 +20,33 @@ import androidx.compose.ui.unit.dp
 fun SettingsScreen(
     onBack: () -> Unit,
     isDarkMode: Boolean,
-    onDarkModeChange: (Boolean) -> Unit
+    onDarkModeChange: (Boolean) -> Unit,
+    onLogout: () -> Unit,
+    unit: String,
+    onUnitChange: (String) -> Unit,
+    mapStyle: String,
+    onMapStyleChange: (String) -> Unit
 ) {
+    var showAbout by remember { mutableStateOf(false) }
+    var showPrivacy by remember { mutableStateOf(false) }
+    var showUnitDialog by remember { mutableStateOf(false) }
+    var showMapStyleDialog by remember { mutableStateOf(false) }
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text("Settings") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
+                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
+                    }
+                },
+                actions = {
+                    IconButton(onClick = onLogout) {
                         Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Back"
+                            imageVector = Icons.Default.ExitToApp,
+                            contentDescription = "Logout",
+                            tint = MaterialTheme.colorScheme.primary
                         )
                     }
                 }
@@ -48,15 +57,27 @@ fun SettingsScreen(
             ListItem(
                 headlineContent = { Text("Dark Mode") },
                 trailingContent = {
-                    Switch(
-                        checked = isDarkMode,
-                        onCheckedChange = onDarkModeChange
-                    )
+                    Switch(checked = isDarkMode, onCheckedChange = onDarkModeChange)
                 }
             )
             ListItem(
+                headlineContent = { Text("Units") },
+                supportingContent = { Text(unit) },
+                modifier = Modifier.clickable { showUnitDialog = true }
+            )
+            ListItem(
+                headlineContent = { Text("Map Style") },
+                supportingContent = { Text(mapStyle) },
+                modifier = Modifier.clickable { showMapStyleDialog = true }
+            )
+            ListItem(
                 headlineContent = { Text("About TrekTimer") },
-                modifier = Modifier.clickable { /* TODO */ }
+                supportingContent = {
+                    if (showAbout) {
+                        Text("TrekTimer is your ultimate companion for tracking and managing your treks. Whether you're a casual hiker or a seasoned mountaineer, TrekTimer helps you record your journeys, monitor your progress, and relive your adventures.")
+                    }
+                },
+                modifier = Modifier.clickable { showAbout = !showAbout }
             )
             ListItem(
                 headlineContent = { Text("Version") },
@@ -64,8 +85,93 @@ fun SettingsScreen(
             )
             ListItem(
                 headlineContent = { Text("Privacy and Security") },
-                modifier = Modifier.clickable { /* TODO */ }
+                supportingContent = {
+                    if (showPrivacy) {
+                        Text("Your privacy is important to us. We are committed to protecting your personal information and being transparent about how we handle it. We do not sell your data, and we use it only to improve your TrekTimer experience.")
+                    }
+                },
+                modifier = Modifier.clickable { showPrivacy = !showPrivacy }
             )
         }
     }
+
+    if (showUnitDialog) {
+        UnitSelectionDialog(
+            currentUnit = unit,
+            onUnitSelected = { onUnitChange(it) },
+            onDismiss = { showUnitDialog = false }
+        )
+    }
+
+    if (showMapStyleDialog) {
+        MapStyleSelectionDialog(
+            currentMapStyle = mapStyle,
+            onMapStyleSelected = { onMapStyleChange(it) },
+            onDismiss = { showMapStyleDialog = false }
+        )
+    }
+}
+
+@Composable
+private fun UnitSelectionDialog(
+    currentUnit: String,
+    onUnitSelected: (String) -> Unit,
+    onDismiss: () -> Unit
+) {
+    val units = listOf("Metric (km)", "Imperial (miles)")
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Select Units") },
+        text = {
+            Column {
+                units.forEach { unit ->
+                    Row(
+                        Modifier
+                            .fillMaxWidth()
+                            .selectable(selected = (unit == currentUnit), onClick = { onUnitSelected(unit) }),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = (unit == currentUnit),
+                            onClick = { onUnitSelected(unit) }
+                        )
+                        Text(text = unit, modifier = Modifier.padding(start = 16.dp))
+                    }
+                }
+            }
+        },
+        confirmButton = { TextButton(onClick = onDismiss) { Text("OK") } }
+    )
+}
+
+@Composable
+private fun MapStyleSelectionDialog(
+    currentMapStyle: String,
+    onMapStyleSelected: (String) -> Unit,
+    onDismiss: () -> Unit
+) {
+    val mapStyles = listOf("Streets", "Satellite", "Outdoors")
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Select Map Style") },
+        text = {
+            Column {
+                mapStyles.forEach { style ->
+                    Row(
+                        Modifier
+                            .fillMaxWidth()
+                            .selectable(selected = (style == currentMapStyle), onClick = { onMapStyleSelected(style) }),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = (style == currentMapStyle),
+                            onClick = { onMapStyleSelected(style) }
+                        )
+                        Text(text = style, modifier = Modifier.padding(start = 16.dp))
+                    }
+                }
+            }
+        },
+        confirmButton = { TextButton(onClick = onDismiss) { Text("OK") } }
+    )
 }
