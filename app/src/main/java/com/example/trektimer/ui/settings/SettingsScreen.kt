@@ -3,6 +3,7 @@ package com.example.trektimer.ui.settings
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+<<<<<<< HEAD
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
@@ -12,6 +13,24 @@ import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+=======
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
+>>>>>>> 91797783a6753e585a23147a820a638957a5e81e
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
@@ -20,6 +39,7 @@ import androidx.compose.ui.unit.dp
 fun SettingsScreen(
     onBack: () -> Unit,
     isDarkMode: Boolean,
+<<<<<<< HEAD
     onDarkModeChange: (Boolean) -> Unit,
     onLogout: () -> Unit,
     unit: String,
@@ -32,12 +52,17 @@ fun SettingsScreen(
     var showUnitDialog by remember { mutableStateOf(false) }
     var showMapStyleDialog by remember { mutableStateOf(false) }
 
+=======
+    onDarkModeChange: (Boolean) -> Unit
+) {
+>>>>>>> 91797783a6753e585a23147a820a638957a5e81e
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text("Settings") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
+<<<<<<< HEAD
                         Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
                     }
                 },
@@ -47,6 +72,11 @@ fun SettingsScreen(
                             imageVector = Icons.Default.ExitToApp,
                             contentDescription = "Logout",
                             tint = MaterialTheme.colorScheme.primary
+=======
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Back"
+>>>>>>> 91797783a6753e585a23147a820a638957a5e81e
                         )
                     }
                 }
@@ -57,6 +87,7 @@ fun SettingsScreen(
             ListItem(
                 headlineContent = { Text("Dark Mode") },
                 trailingContent = {
+<<<<<<< HEAD
                     Switch(checked = isDarkMode, onCheckedChange = onDarkModeChange)
                 }
             )
@@ -78,6 +109,17 @@ fun SettingsScreen(
                     }
                 },
                 modifier = Modifier.clickable { showAbout = !showAbout }
+=======
+                    Switch(
+                        checked = isDarkMode,
+                        onCheckedChange = onDarkModeChange
+                    )
+                }
+            )
+            ListItem(
+                headlineContent = { Text("About TrekTimer") },
+                modifier = Modifier.clickable { /* TODO */ }
+>>>>>>> 91797783a6753e585a23147a820a638957a5e81e
             )
             ListItem(
                 headlineContent = { Text("Version") },
@@ -85,6 +127,7 @@ fun SettingsScreen(
             )
             ListItem(
                 headlineContent = { Text("Privacy and Security") },
+<<<<<<< HEAD
                 supportingContent = {
                     if (showPrivacy) {
                         Text("Your privacy is important to us. We are committed to protecting your personal information and being transparent about how we handle it. We do not sell your data, and we use it only to improve your TrekTimer experience.")
@@ -174,4 +217,10 @@ private fun MapStyleSelectionDialog(
         },
         confirmButton = { TextButton(onClick = onDismiss) { Text("OK") } }
     )
+=======
+                modifier = Modifier.clickable { /* TODO */ }
+            )
+        }
+    }
+>>>>>>> 91797783a6753e585a23147a820a638957a5e81e
 }
