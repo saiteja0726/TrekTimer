@@ -1,4 +1,5 @@
 package com.example.trektimer.ui.home
+<<<<<<< HEAD
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -7,11 +8,23 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Settings
+=======
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+>>>>>>> 97faeb6 (Sprint 4)
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+<<<<<<< HEAD
+=======
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExitToApp
+import androidx.compose.material.icons.filled.PlayArrow
+>>>>>>> 97faeb6 (Sprint 4)
 import com.example.trektimer.data.local.User
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -19,8 +32,12 @@ import com.example.trektimer.data.local.User
 fun HomeScreen(
     user: User,
     onLogout: () -> Unit,
+<<<<<<< HEAD
     onStartTracking: () -> Unit,
     onSettingsClick: () -> Unit
+=======
+    onStartTracking: () -> Unit
+>>>>>>> 97faeb6 (Sprint 4)
 ) {
     Scaffold(
         topBar = {
@@ -39,6 +56,7 @@ fun HomeScreen(
                     }
                 },
                 actions = {
+<<<<<<< HEAD
                     IconButton(onClick = onSettingsClick) {
                         Icon(
                             imageVector = Icons.Default.Settings,
@@ -46,6 +64,8 @@ fun HomeScreen(
                             tint = MaterialTheme.colorScheme.primary
                         )
                     }
+=======
+>>>>>>> 97faeb6 (Sprint 4)
                     IconButton(onClick = onLogout) {
                         Icon(
                             imageVector = Icons.Default.ExitToApp,
@@ -61,7 +81,10 @@ fun HomeScreen(
         },
         containerColor = MaterialTheme.colorScheme.background
     ) { paddingValues ->
+<<<<<<< HEAD
 
+=======
+>>>>>>> 97faeb6 (Sprint 4)
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -69,7 +92,11 @@ fun HomeScreen(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+<<<<<<< HEAD
 
+=======
+            // 1. Stats Overview Card
+>>>>>>> 97faeb6 (Sprint 4)
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(
@@ -89,21 +116,38 @@ fun HomeScreen(
                 }
             }
 
+<<<<<<< HEAD
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp)
                     .clickable { onStartTracking() },
+=======
+            // 2. Main Action - Start Trek
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp),
+>>>>>>> 97faeb6 (Sprint 4)
                 shape = RoundedCornerShape(24.dp),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.primary
+<<<<<<< HEAD
                 )
+=======
+                ),
+                onClick = onStartTracking
+>>>>>>> 97faeb6 (Sprint 4)
             ) {
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
+<<<<<<< HEAD
+=======
+                    // Background pattern or image could go here
+>>>>>>> 97faeb6 (Sprint 4)
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Icon(
                             imageVector = Icons.Default.PlayArrow,
@@ -121,12 +165,20 @@ fun HomeScreen(
                 }
             }
 
+<<<<<<< HEAD
+=======
+            // 3. Recent Activity Header
+>>>>>>> 97faeb6 (Sprint 4)
             Text(
                 text = "Recent Activity",
                 style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier.padding(top = 8.dp)
             )
 
+<<<<<<< HEAD
+=======
+            // Placeholder for list
+>>>>>>> 97faeb6 (Sprint 4)
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -160,4 +212,8 @@ fun StatItem(label: String, value: String) {
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 97faeb6 (Sprint 4)

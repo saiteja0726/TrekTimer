@@ -2,7 +2,11 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+<<<<<<< HEAD
     id("kotlin-kapt")
+=======
+    alias(libs.plugins.ksp)
+>>>>>>> 97faeb6 (Sprint 4)
     id("com.google.gms.google-services")
 }
 
@@ -56,6 +60,10 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+<<<<<<< HEAD
+=======
+    testImplementation(libs.junit)
+>>>>>>> 97faeb6 (Sprint 4)
 
     // ViewModel + lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4")
@@ -64,7 +72,11 @@ dependencies {
 
     // Room
     implementation("androidx.room:room-runtime:2.6.1")
+<<<<<<< HEAD
     kapt("androidx.room:room-compiler:2.6.1")
+=======
+    ksp("androidx.room:room-compiler:2.6.1")
+>>>>>>> 97faeb6 (Sprint 4)
     implementation("androidx.room:room-ktx:2.6.1")
 
     // DataStore
